@@ -1,18 +1,17 @@
 #include <iostream>
 #include <string>
 #include "Usuario.h"
-#include "Pescado.h"
-#include "Barco.h"
+#include "Mercancia.h"
 
 using namespace std;
 
 int main(){
   //Defino las variables con las que trabajaré
-  string nombrePez;
-  float pesoPez;
-  float precioPez;
-  float cantidadPez;
-  Pescado pez1;
+  string nombreMercancia;
+  float pesoMercancia;
+  float precioMercancia;
+  float cantidadMercancia;
+  Mercancia mercancia1;
 
   string nombreBarco;
   string tipoBarco;
@@ -30,27 +29,27 @@ int main(){
   cout << "¿Posees licencia para pescar?(si/no) ";
   cin >> licencia;
   //Creo el objeto usuario 1
-  Usuario usuario1(nombre, licencia);
+  Usuario usuario1(nombre, licencia, barco1);
   //Creo un if donde si la respuesta a licencia es de no, ya no puedes avanzar
   if (licencia == "no"){
     cout << "Consigue una licencia primero" << endl;
   } else if (licencia == "si"){
     //Si se cumple la condición de la licencia, se le pregunta al usuario el resto de datos
-    cout << "Ingresa el nombre del pez que atrapaste (solo una palabra): ";
-    cin >> nombrePez;
+    cout << "Ingresa el nombre del producto (pez o marisco) que atrapaste (solo una palabra): ";
+    cin >> nombreMercancia;
 
-    cout << "Ingresa el peso del pez que atrapaste (en libras): ";
-    cin >> pesoPez;
+    cout << "Ingresa el peso del producto que atrapaste (en libras): ";
+    cin >> pesoMercancia;
 
-    cout << "Ingresa el precio por libra del pez (por libra): ";
-    cin >> precioPez;
+    cout << "Ingresa el precio por libra del producto (por libra): ";
+    cin >> precioMercancia;
 
-    cout << "Ingresa la cantidad de peces que capturaste: ";
-    cin >> cantidadPez;
+    cout << "Ingresa la cantidad que capturaste de ese producto: ";
+    cin >> cantidadMercancia;
     //Creo el objeto pez1 en base a los datos de pez
-    Pescado pez1(nombrePez, pesoPez, precioPez, cantidadPez);
+    Mercancia mercancia1(nombreMercancia, pesoMercancia, precioMercancia, cantidadMercancia);
     //Obtengo la cantidad de ganacia que se gana al vender todos los peces en base al precio por libra, al peso y a la cantidad de peces.
-    pez1.valor(pesoPez,precioPez, cantidadPez);
+    mercancia1.valor(pesoMercancia,precioMercancia, cantidadMercancia);
 
     cout << "Ingresa el nombre de tu barco (solo una palabra): ";
     cin >> nombreBarco;
@@ -66,15 +65,15 @@ int main(){
     //Creo el objeto barco1 en base a los datos de barco
     Barco barco1(nombreBarco, tipoBarco, tipoMotor, capacidad);
     //calculo cuanto peso lleva el barco en base al peso del pez y la cantidad de peces
-    pesoTotal = pesoPez*cantidadPez;
+    pesoTotal = pesoMercancia*cantidadMercancia;
     //Defino que si se supera la capacidad del barco en libras, no puedes continuar
     if (capacidad < pesoTotal){
       cout << "Tu barco no puede almacenar esa cantidad de pescado (o por cantidad o por peso)" << endl;
     } else {
       //imprimo los datos
       usuario1.imprimeDatosUser();
-      pez1.imprimeDatosPez();
-      cout << "Peso total en pescado: " << pesoTotal << " libras" << endl;
+      mercancia1.imprimeDatosMercancia();
+      cout << "El peso total que genera el producto fue de : " << pesoTotal << " libras" << endl;
       barco1.imprimeDatosBarco();
     }
   }else{

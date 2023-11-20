@@ -1,3 +1,6 @@
+#ifndef BARCO_H
+#define BARCO_H
+
 #include <iostream>
 #include <string>
 
@@ -14,23 +17,24 @@ class Barco{
   public:
 
     string getNombreBarco();
-    string setNombreBarco(string nombreBarco);
+    void setNombreBarco(string nombreBarco);
 
     string getTipoBarco();
-    string setTipoBarco(string tipoBarco);
+    void setTipoBarco(string tipoBarco);
 
     string getTipoMotor();
-    string setTipoMotor(string tipoMotor);
+    void setTipoMotor(string tipoMotor);
 
     float getCapacidad();
-    float setCapacidad(string Capacidad);
+    void setCapacidad(float Capacidad);
     //Objeto por omisión
     Barco();
     //Objeto Barco
     Barco(string nomBar, string tipBar, string tipMoto, float cap);
     //Objeto imprimeDatosBarco imprime los datos de barco
     void imprimeDatosBarco();
-};
+}; 
+
 //Objeto por omisión
 Barco::Barco(){
   nombreBarco = "";
@@ -50,37 +54,39 @@ string Barco::getNombreBarco(){
   return nombreBarco;
 }
 
-string Barco::setNombreBarco(string nombreBarco){
-  return nombreBarco;
+void Barco::setNombreBarco(string nomBar){
+  nombreBarco = nomBar;
 }
 
 string Barco::getTipoBarco(){
   return tipoBarco;
 }
 
-string Barco::setTipoBarco(string tipoBarco){
-  return tipoBarco;
+void Barco::setTipoBarco(string tipBar){
+  tipoBarco = tipBar;
 }
 
 string Barco::getTipoMotor(){
   return tipoMotor;
 }
 
-string Barco::setTipoMotor(string tipoMotor){
-  return tipoBarco;
+void Barco::setTipoMotor(string tipMoto){
+  tipoMotor = tipMoto;
 }
 
 float Barco::getCapacidad(){
   return capacidad;
 }
 
-float Barco::setCapacidad(string Capacidad){
-  return capacidad;
+void Barco::setCapacidad(float cap){
+  capacidad = cap;
 }
 //Objeto imprimeDatosBarco imprime los datos de barco
 void Barco::imprimeDatosBarco(){
   cout << "Nombre del barco: " << nombreBarco << endl;
   cout << "Tipo de barco: " << tipoBarco << endl;
   cout << "Tipo de motor que usa el barco: " << tipoMotor << endl;
-  cout << "Cantidad de peso en pez que soporta el barco: " << capacidad << " libras"<< endl;
+  cout << "Cantidad de peso en mercancía que soporta el barco: " << capacidad << " libras"<< endl;
 }
+
+#endif
