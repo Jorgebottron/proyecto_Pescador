@@ -2,22 +2,40 @@
 #include <string>
 #include "Usuario.h"
 #include "Mercancia.h"
+#include "Pescado.h"
+#include "Mariscos.h"
 
 using namespace std;
 
 int main(){
   //Defino las variables con las que trabajaré
   string nombreMercancia;
-  float pesoMercancia;
-  float precioMercancia;
-  float cantidadMercancia;
+  float pesoMercancia = 0.0;
+  float precioMercancia = 0.0;
+  float cantidadMercancia = 0.0;
   Mercancia mercancia1;
+  string tipoMercancia;
+
+  string tipoCarne;
+  string hueva;
+  float precioHueva = 0.0;
+  int cantidadHueva = 0;
+
+  string tipoMarisco;
+  string productoExtra;
+  string tipoProducto;
+  float valorProducto = 0.0;
+  int cantidadProducto = 0;
+  int caducidad = 0;
 
   string nombreBarco;
   string tipoBarco;
   string tipoMotor;
-  float capacidad;// en libras
+  float capacidad = 0.0;// en libras
   Barco barco1;
+  
+  Pescado pescado1 = Pescado();
+  Mariscos marisco1 = Mariscos();
 
   float pesoTotal;
   //Le pido su nombre al usuario
@@ -35,44 +53,108 @@ int main(){
     cout << "Consigue una licencia primero" << endl;
   } else if (licencia == "si"){
     //Si se cumple la condición de la licencia, se le pregunta al usuario el resto de datos
-    cout << "Ingresa el nombre del producto (pez o marisco) que atrapaste (solo una palabra): ";
-    cin >> nombreMercancia;
+      
+      cout << "Ingresa el nombre del producto (pescado/marisco) que atrapaste (solo una palabra): ";
+      cin >> nombreMercancia;
+  
+      cout << "Ingresa el peso del producto que atrapaste (en kg): ";
+      cin >> pesoMercancia;
+  
+      cout << "Ingresa el precio por libra del producto (por kg): ";
+      cin >> precioMercancia;
+  
+      cout << "Ingresa la cantidad que capturaste de ese producto: ";
+      cin >> cantidadMercancia;
+   
+      cout << "¿Qué tipo de mercancía capturaste? (Pescado/Marisco) ";
+      cin >> tipoMercancia;
+    
+    if (tipoMercancia == "pescado" || 
+        tipoMercancia == "Pescado" || 
+        tipoMercancia == "PESCADO" || 
+        tipoMercancia == "pez" || 
+        tipoMercancia == "Pez" || 
+        tipoMercancia == "PEZ")
+    {
+      pescado1 = Pescado(nombreMercancia, pesoMercancia, precioMercancia, cantidadMercancia, tipoCarne, hueva, precioHueva, cantidadHueva);
+      
+      cout << "¿Qué tipo de carne de pescado de es? (de pescado blanco/azul/semigraso) ";
+      cin >> tipoCarne;
+      
+      cout << "¿Se puede veder la hueva del pescado que capturaste?(s/n)";
+      cin >> hueva;
+      
+      if (hueva == "s"){
+        cout << "Ingresa el precio de la hueva por gramo: ";
+        cin >> precioHueva;
 
-    cout << "Ingresa el peso del producto que atrapaste (en libras): ";
-    cin >> pesoMercancia;
+        cout << "Ingresa cuántas huevas tiene el pesacdo que capturaste (en gramos): ";
+        cin >> cantidadHueva;
 
-    cout << "Ingresa el precio por libra del producto (por libra): ";
-    cin >> precioMercancia;
+        pescado1.valorPescado(pesoMercancia, precioMercancia, cantidadMercancia, precioHueva, cantidadHueva);
+      } else if(hueva == "n"){
+        pescado1.valor(pesoMercancia, precioMercancia, cantidadMercancia);
+      } else{
+        cout << "Ingresa una respuesta válida" << endl;
+      }
+    } 
+     else if( tipoMercancia == "marisco" || 
+              tipoMercancia == "Marisco" || 
+              tipoMercancia == "MARISCO" ){
+      
+      marisco1 = Mariscos(nombreMercancia, pesoMercancia, precioMercancia, cantidadMercancia, tipoMarisco, productoExtra, tipoProducto, valorProducto, cantidadProducto, caducidad);
+      
+      cout << "¿Qué tipo de marisco atrapaste";
+      cin >> tipoMarisco;
 
-    cout << "Ingresa la cantidad que capturaste de ese producto: ";
-    cin >> cantidadMercancia;
-    //Creo el objeto pez1 en base a los datos de pez
-    Mercancia mercancia1(nombreMercancia, pesoMercancia, precioMercancia, cantidadMercancia);
-    //Obtengo la cantidad de ganacia que se gana al vender todos los peces en base al precio por libra, al peso y a la cantidad de peces.
-    mercancia1.valor(pesoMercancia,precioMercancia, cantidadMercancia);
+      cout << "¿Cuánto va a tardar en caducar?(en días) ";
+      cin >> caducidad;
 
-    cout << "Ingresa el nombre de tu barco (solo una palabra): ";
-    cin >> nombreBarco;
+      cout << "¿Tiene algún producto extra que puedas vender?(s/n) ";
+      cin >> productoExtra; 
+      if (productoExtra == "s"){
+        cout << "Ingresa que tipo de producto extra es: ";
+        cin >> tipoProducto;
 
-    cout << "¿Qué tipo de barco es? (Madera/acero): ";
-    cin >> tipoBarco;
+        cout << "¿Qué valor tiene ese producto? ";
+        cin >> valorProducto;
 
-    cout << "¿Qué tipo de motor tiene tu barco? (electrico/turbina/híbrido): ";
-    cin >> tipoMotor;
-
-    cout << "¿Cuál es tu capacidad máxima de pescado?(en libras): ";
-    cin >> capacidad;
-    //Creo el objeto barco1 en base a los datos de barco
-    Barco barco1(nombreBarco, tipoBarco, tipoMotor, capacidad);
-    //calculo cuanto peso lleva el barco en base al peso del pez y la cantidad de peces
-    pesoTotal = pesoMercancia*cantidadMercancia;
-    //Defino que si se supera la capacidad del barco en libras, no puedes continuar
+        cout << "¿Qué cantidad posees de ese producto?";
+        cin >> cantidadProducto;
+  
+        marisco1.valorMariscos(pesoMercancia, precioMercancia, cantidadMercancia, valorProducto, cantidadProducto);
+          
+      } else if(productoExtra == "n"){
+        marisco1.valorMariscos(pesoMercancia, precioMercancia, cantidadMercancia, valorProducto, cantidadProducto);
+    }
+  }
+  
+      cout << "Ingresa el nombre de tu barco (solo una palabra): ";
+      cin >> nombreBarco;
+  
+      cout << "¿Qué tipo de barco es? (Madera/acero): ";
+      cin >> tipoBarco;
+  
+      cout << "¿Qué tipo de motor tiene tu barco? (electrico/turbina/híbrido): ";
+      cin >> tipoMotor;
+  
+      cout << "¿Cuál es tu capacidad máxima de pescado?(en libras): ";
+      cin >> capacidad;
+      //Creo el objeto barco1 en base a los datos de barco
+      Barco barco1(nombreBarco, tipoBarco, tipoMotor, capacidad);
+      //calculo cuanto peso lleva el barco en base al peso del pez y la cantidad de peces
+      pesoTotal = pesoMercancia*cantidadMercancia;
+      //Defino que si se supera la capacidad del barco en libras, no puedes continuar
     if (capacidad < pesoTotal){
       cout << "Tu barco no puede almacenar esa cantidad de pescado (o por cantidad o por peso)" << endl;
     } else {
       //imprimo los datos
+      if (tipoMercancia == "pescado" || "Pescado" || "PESCADO" || "pez" || "Pez" || "PEZ"){
+        pescado1.imprimeDatosPescado();
+      } else if (tipoMercancia == "marisco" || "Marisco" || "MARISCO"){
+        marisco1.imprimeDatosMariscos();
+      }
       usuario1.imprimeDatosUser();
-      mercancia1.imprimeDatosMercancia();
       cout << "El peso total que genera el producto fue de : " << pesoTotal << " libras" << endl;
       barco1.imprimeDatosBarco();
     }
@@ -83,4 +165,5 @@ int main(){
   
   return 0;
 
+  
 }

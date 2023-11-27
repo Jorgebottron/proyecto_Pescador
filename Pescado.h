@@ -1,93 +1,103 @@
+#ifndef PESCADO_H
+#define PESCADO_H
+
 #include <iostream>
 #include <string>
+#include "Mercancia.h"
 
 using namespace std;
 
-class Pescado{
-  //Defino mis atributos
+class Pescado: public Mercancia{
   private:
-    string nombrePez;
-    float pesoPez; //en libras
-    float precioPez; //por libra
-    float cantidadPez; //en libras
-  //Defino mis métodos
+    string tipoCarne;
+    string hueva;
+    float precioHueva;
+    int cantidadHueva;
+
   public:
-    float valor(float pesoPez, float precioPez, float cantidadPez);
+    string getTipoCarne();
+    void setTipoCarne(string _tipoCarne);
 
-    string getNombrePez();
-    string setNombrePez(string nombrePez);
+    string getHueva();
+    void setHueva(string _hueva);
 
-    float getPesoPez();
-    float setPesoPez(float pesoPez);
+    float getPrecioHueva();
+    void setPrecioHueva(float _precioHueva);
 
-    float getPrecioPez();
-    float setPrecioPez(float precioPez);
+    int getCantidadHueva();
+    void setCantidadHueva(int _cantidadHueva);
 
-    float getCantidadPez();
-    float setCantidadPez(float cantidadPez);
-    //Objeto por omisión
     Pescado();
-    //Objeto pescado
-    Pescado(string nom, float po, float pre, float cant);
-    //Objeto imprimeDatosPez que imprime los datos de pez
-    void imprimeDatosPez();
+    Pescado(string nom, float po, float pre, float cant, string _tipoCarne, string _hueva, float _precioHueva, int _cantidadHueva);
+
+    void imprimeDatosPescado();
+
+    float valorPescado(float pesoMercancia, float precioMercancia, float cantidadMercancia, float precioHueva, int cantidadHueva);
+    
 };
-//Creo el objeto por omisión
+//objeto por omisión
 Pescado::Pescado(){
-  nombrePez = "";
-  pesoPez = 0.0;
-  precioPez = 0.0;
-  cantidadPez = 0.0;
+  tipoCarne = "";
+  hueva = "";
+  precioHueva = 0.0;
+  cantidadHueva = 0;
 }
-//Creo el objeto pescado normal
-Pescado::Pescado(string nom, float po, float pre, float cant){
-  nombrePez = nom;
-  pesoPez = po;
-  precioPez = pre;
-  cantidadPez = cant;
-}
-//GETTERS y SETTERS
-string Pescado::setNombrePez(string nombre){
-  return nombrePez;
+//objeto con declaraciones
+Pescado::Pescado(string nom, float po, float pre, float cant, string _tipoCarne, string _hueva, float _precioHueva, int _cantidadHueva){
+  tipoCarne = _tipoCarne;
+  hueva = _hueva;
+  precioHueva = _precioHueva;
+  cantidadHueva = _cantidadHueva;
 }
 
-string Pescado::getNombrePez(){
-  return nombrePez;
+void Pescado::setTipoCarne(string _tipoCarne){
+  tipoCarne = _tipoCarne;
 }
 
-float Pescado::setPesoPez(float peso){
-  return pesoPez;
+string Pescado::getTipoCarne(){
+  return tipoCarne;
 }
 
-float Pescado::getPesoPez(){
-  return pesoPez;
+void Pescado::setHueva(string _hueva){
+  hueva = _hueva;
 }
 
-float Pescado::setPrecioPez(float precio){
-  return precioPez;
+string Pescado::getHueva(){
+  return hueva;
 }
 
-float Pescado::getPrecioPez(){
-  return precioPez;
+void Pescado::setPrecioHueva(float _precioHueva){
+  precioHueva = _precioHueva;
 }
 
-float Pescado::setCantidadPez(float cantidadPez){
-  return cantidadPez;
+float Pescado::getPrecioHueva(){
+  return precioHueva;
 }
 
-float Pescado::getCantidadPez(){
-  return cantidadPez;
+void Pescado::setCantidadHueva(int _cantidadHueva){
+  cantidadHueva = _cantidadHueva;
 }
-//Calculo el valor del pez en base al peso, precio por libra y la cantidad capturada de ese mismo tipo de pez.
-float Pescado::valor(float pesoPez, float precioPez, float cantidadPez){
-  return pesoPez*precioPez*cantidadPez;
+
+int Pescado::getCantidadHueva(){
+  return cantidadHueva;
 }
-//Imprimo todos los datos de pez
-void Pescado::imprimeDatosPez(){
-  cout << "Tipo de pez: " << nombrePez << endl;
-  cout << "Pesa: " << pesoPez << " libras" << endl;
-  cout << "El precio por libra es de: " << precioPez << "$" << endl;
-  cout << "La cantidad capturada de peces fue de: " << cantidadPez << " libras" << endl; 
-  cout << "Tu ganacia al vender los peces es de: " << valor(pesoPez,precioPez, cantidadPez) << "$" << endl;
-  
+
+float Pescado::valorPescado(float pesoMercancia, float precioMercancia, float cantidadMercancia, float precioHueva, int cantidadHueva){
+  return (pesoMercancia * precioMercancia * cantidadMercancia) + (precioHueva * cantidadHueva);
 }
+
+
+void Pescado::imprimeDatosPescado(){
+  imprimeDatosMercancia();
+  cout << "Tipo de carne del pescado: " << tipoCarne << endl;
+  cout << "¿Se puede vender la hueva del pescado?(s/n) " << hueva << endl;
+  if (hueva == "s"){
+    cout << "Valor de la hueva: " << precioHueva << endl;
+    cout << "Cantidad de hueva: " << cantidadHueva << endl;
+    cout << "Tu ganacia al vender toda la mercancía es de: $" << valorPescado(pesoMercancia,precioMercancia, cantidadMercancia, precioHueva, cantidadHueva) << endl;
+  } else {
+    cout << "Tu ganacia al vender toda la mercancía es de: $" << valor(pesoMercancia,precioMercancia, cantidadMercancia) << endl;
+  }
+}
+
+#endif

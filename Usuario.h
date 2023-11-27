@@ -1,3 +1,6 @@
+#ifndef USUARIO_H
+#define USUARIO_H
+
 #include <iostream>
 #include <string>
 #include "Barco.h"
@@ -74,3 +77,5 @@ void Usuario::imprimeDatosUser(){
   cout << "Licencia: " << licencia << endl;
   barco.imprimeDatosBarco();
 }
+
+#endif

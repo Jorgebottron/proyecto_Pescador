@@ -1,3 +1,6 @@
+#ifndef MERCANCIA_H
+#define MERCANCIA_H
+
 #include <iostream>
 #include <string>
 
@@ -5,7 +8,7 @@ using namespace std;
 
 class Mercancia{
   //Defino mis atributos
-  private:
+  protected:
     string nombreMercancia;
     float pesoMercancia; //en libras
     float precioMercancia; //por libra
@@ -87,7 +90,9 @@ void Mercancia::imprimeDatosMercancia(){
   cout << "Tipo de Mercancia: " << nombreMercancia << endl;
   cout << "Pesa: " << pesoMercancia << " libras" << endl;
   cout << "El precio por libra es de: " << precioMercancia << "$" << endl;
-  cout << "La cantidad capturada de esa mercancía (peces o mariscos) fue de: " << cantidadMercancia << " libras" << endl; 
-  cout << "Tu ganacia al vender toda la mercancía es de: " << valor(pesoMercancia,precioMercancia, cantidadMercancia) << "$" << endl;
+  cout << "La cantidad capturada de esa mercancía (peces o mariscos) fue de: " << cantidadMercancia <<  endl; 
+
   
 }
+
+#endif 
